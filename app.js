@@ -1,3 +1,4 @@
+// Generate random color
 let colors = generateRandomColors(6);
 
 // Square select
@@ -12,6 +13,13 @@ let messageDisplay = document.querySelector("#message");
 let h1 = document.querySelector("h1");
 // Reset button select
 let reset = document.querySelector("#reset");
+// Easy button select
+let easyBtn = document.querySelector("#easyBtn");
+// Hard button select
+let hardBtn = document.querySelector("#hardBtn");
+
+// Setting the random picked color to main color display
+colorDisplay.textContent = pickedColor.toUpperCase();
 
 // Reset button event listener
 reset.addEventListener("click", function () {
@@ -30,15 +38,22 @@ reset.addEventListener("click", function () {
   h1.style.backgroundColor = "#232323";
 });
 
+// Easy button event listener
+easyBtn.addEventListener("click", function () {
+  easyBtn.classList.add("selected");
+  hardBtn.classList.remove("selected");
+});
 
-// Setting the random picked color to main color display
-colorDisplay.textContent = pickedColor.toUpperCase();
+// Hard button event listener
+hardBtn.addEventListener("click", function () {
+  easyBtn.classList.remove("selected");
+  hardBtn.classList.add("selected");
+});
 
 // Loop over squares to check color
 for (let i = 0; i < squares.length; i++) {
   // Add initial colors
   squares[i].style.backgroundColor = colors[i];
-
   // Add event listeners
   squares[i].addEventListener("click", function () {
     // Background color of clicked square

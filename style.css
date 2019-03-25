@@ -1,5 +1,6 @@
 body {
   background-color: #232323;
+  font-size: 8px;
 }
 
 h1 {
@@ -8,15 +9,16 @@ h1 {
   text-align: center;
 }
 
+button {
+  font-size: 8px;
+  padding: 0;
+}
+
 #stripe {
   background-color: white;
   text-align: center;
   height: 30px;
   color: black;
-}
-
-#message {
-  font-size: 8px;
 }
 
 #container {
@@ -29,4 +31,8 @@ h1 {
   padding-bottom: 30%;
   float: left;
   margin: 1.66%;
+}
+
+.selected {
+  background-color: blue;
 }
