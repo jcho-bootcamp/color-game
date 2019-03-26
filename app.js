@@ -1,5 +1,7 @@
+// Initial number of squares
+let numSquares = 6
 // Generate random color
-let colors = generateRandomColors(6);
+let colors = generateRandomColors(numSquares);
 
 // Square select
 let squares = document.querySelectorAll(".square");
@@ -19,16 +21,16 @@ let easyBtn = document.querySelector("#easyBtn");
 let hardBtn = document.querySelector("#hardBtn");
 
 // Setting the random picked color to main color display
-colorDisplay.textContent = pickedColor.toUpperCase();
+colorDisplay.textContent = pickedColor;
 
 // Reset button event listener
 reset.addEventListener("click", function () {
   // Generate random colors
-  colors = generateRandomColors(6);
+  colors = generateRandomColors(numSquares);
   // Pick from new colors array
   pickedColor = randomColor();
   // Change colorDisplay to pickedColor
-  colorDisplay.textContent = pickedColor.toUpperCase();
+  colorDisplay.textContent = pickedColor;
   // Change all squares to newly generated randon colors
   for (let i = 0; i < squares.length; i++) {
     // Add initial colors
@@ -42,12 +44,33 @@ reset.addEventListener("click", function () {
 easyBtn.addEventListener("click", function () {
   easyBtn.classList.add("selected");
   hardBtn.classList.remove("selected");
+  numSquares = 3;
+  colors = generateRandomColors(numSquares);
+  pickedColor = randomColor();
+  colorDisplay.textContent = pickedColor;
+
+  for (let i = 0; i < squares.length; i++) {
+    if (colors[i]) {
+      squares[i].style.backgroundColor = colors[i];
+    } else {
+      squares[i].style.display = "none";
+    }
+  }
 });
 
 // Hard button event listener
 hardBtn.addEventListener("click", function () {
   easyBtn.classList.remove("selected");
   hardBtn.classList.add("selected");
+  numSquares = 6;
+  colors = generateRandomColors(numSquares);
+  pickedColor = randomColor();
+  colorDisplay.textContent = pickedColor;
+
+  for (let i = 0; i < squares.length; i++) {
+    squares[i].style.backgroundColor = colors[i];
+    squares[i].style.display = "block";
+  }
 });
 
 // Loop over squares to check color
