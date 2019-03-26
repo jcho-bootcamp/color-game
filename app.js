@@ -15,10 +15,15 @@ let messageDisplay = document.querySelector("#message");
 let h1 = document.querySelector("h1");
 // Reset button select
 let reset = document.querySelector("#reset");
+// Easy / Hard button selector
+let modeButtons = document.querySelectorAll(".mode");
+
+/* Refactored Easy / Hard buttons
 // Easy button select
 let easyBtn = document.querySelector("#easyBtn");
 // Hard button select
 let hardBtn = document.querySelector("#hardBtn");
+*/
 
 // Setting the random picked color to main color display
 colorDisplay.textContent = pickedColor;
@@ -37,9 +42,25 @@ reset.addEventListener("click", function () {
     squares[i].style.backgroundColor = colors[i];
   }
   // Change h1 background color to default
-  h1.style.backgroundColor = "#232323";
+  h1.style.backgroundColor = "steelblue";
+  messageDisplay.textContent = "";
+  this.textContent = "New Colors";
 });
 
+// Easy / Hard buttons event listener
+for (let i = 0; i < modeButtons.length; i++) {
+  modeButtons[i].addEventListener("click", function () {
+    modeButtons[0].classList.remove("selected");
+    modeButtons[1].classList.remove("selected");
+    this.classList.add("selected");
+
+    this.textContent === "Easy" ? numSquares = 3 : numSquares = 6;
+
+    buttons();
+  });
+};
+
+/* Refactored Easy / Hard buttons
 // Easy button event listener
 easyBtn.addEventListener("click", function () {
   easyBtn.classList.add("selected");
@@ -72,6 +93,7 @@ hardBtn.addEventListener("click", function () {
     squares[i].style.display = "block";
   }
 });
+*/
 
 // Loop over squares to check color
 for (let i = 0; i < squares.length; i++) {
@@ -125,4 +147,22 @@ function rgbColor() {
   let b = Math.floor(Math.random() * 256);
 
   return `rgb(${r}, ${g}, ${b})`;
+}
+
+function buttons() {
+  // Generate random colors
+  colors = generateRandomColors(numSquares);
+  // Pick from new colors array
+  pickedColor = randomColor();
+  // Change colorDisplay to pickedColor
+  colorDisplay.textContent = pickedColor;
+  // Change all squares to newly generated random colors
+  for (let i = 0; i < squares.length; i++) {
+    // Add initial colors
+    squares[i].style.backgroundColor = colors[i];
+  }
+  // Change h1 background color to default
+  h1.style.backgroundColor = "steelblue";
+  messageDisplay.textContent = "";
+  reset.textContent = "New Colors";
 }
